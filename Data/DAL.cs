@@ -13,8 +13,9 @@ namespace ASPNETCLINIC.Data
         public List<Patient> GetPatients();
         public Patient GetPatient(int id);
         public void CreatePatient(Patient patient);
-
-          
+        public void CreateLocation(Doctor location);
+        public List<Doctor> GetLocations();
+        public Doctor GetLocation(int id);
 
     }
     public class DAL : IDAL
@@ -52,7 +53,7 @@ namespace ASPNETCLINIC.Data
         public void UpdateEvent(IFormCollection form)
         {
             var locname = form["Patient"].ToString();
-            var eventid = int.Parse(form["Id"]);
+            var eventid = int.Parse(form["Event.Id"]);
             var myevent = db.Events.FirstOrDefault(x => x.Id == eventid);
             var patient = db.Patients.FirstOrDefault(x => x.Name == form["Name"]);
             myevent.UpdateEvent(form, patient);
@@ -81,6 +82,20 @@ namespace ASPNETCLINIC.Data
             db.Patients.Add(patient);
             db.SaveChanges();
         }
+        public List<Doctor> GetLocations()
+        {
+            return db.Locations.ToList();
+        }
 
+        public Doctor GetLocation(int id)
+        {
+            return db.Locations.Find(id);
+        }
+
+        public void CreateLocation(Doctor location)
+        {
+            db.Locations.Add(location);
+            db.SaveChanges();
+        }
     }
 }

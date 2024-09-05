@@ -91,7 +91,8 @@ namespace ASPNETCLINIC.Controllers
             {
                 return NotFound();
             }
-            return View(@event);
+            var vm = new EventViewModel(@event, _dal.GetPatients()); 
+            return View(vm);
         }
 
         // POST: Event/Edit/5
@@ -99,23 +100,21 @@ namespace ASPNETCLINIC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, EventViewModel vm, IFormCollection form)
+        public async Task<IActionResult> Edit(int id, IFormCollection form)
         {
-            if (id != vm.Event.Id)
-            {
-                return NotFound();
-            }
+     
 
-            try
+            try  
             {
                 _dal.UpdateEvent(form);
-                TempData["Alert"] = "Udało się zedytować wpis: " + vm.Event.Name;
+                TempData["Alert"] = "Udało się zedytować wpis: " + form["Event.Name"];
                 return RedirectToAction(nameof(Index));
             }
 
             catch (Exception ex)
             {
                ViewData["Alert"] = "Wystapil blad: " + ex.Message;
+                var vm = new EventViewModel(_dal.GetEvent(id), _dal.GetPatients());
                 return View(vm);
             }
           

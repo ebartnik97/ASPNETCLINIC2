@@ -55,7 +55,7 @@ namespace ASPNETCLINIC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,PatientSurname,PESEL")] Patient patient)
+        public IActionResult Create([Bind("Id,Name,PatientSurname,PESEL")] Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -68,13 +68,13 @@ namespace ASPNETCLINIC.Controllers
                 catch (Exception ex)
                 {
                     ViewData["Alert"] = "Wystapil błąd!" + ex.Message;
-                         return View(patient);
+                    return View(patient);
                 }
-           
+
             }
             return View(patient);
         }
 
-        }
+    }
     }
 

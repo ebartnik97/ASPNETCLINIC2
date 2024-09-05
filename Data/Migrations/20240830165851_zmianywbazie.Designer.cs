@@ -4,6 +4,7 @@ using ASPNETCLINIC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNETCLINIC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240830165851_zmianywbazie")]
+    partial class zmianywbazie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,9 +105,6 @@ namespace ASPNETCLINIC.Data.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -120,30 +120,11 @@ namespace ASPNETCLINIC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
-
                     b.HasIndex("PatientsId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("ASPNETCLINIC.Models.Location", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("ASPNETCLINIC.Models.Patient", b =>
@@ -310,10 +291,6 @@ namespace ASPNETCLINIC.Data.Migrations
 
             modelBuilder.Entity("ASPNETCLINIC.Models.Event", b =>
                 {
-                    b.HasOne("ASPNETCLINIC.Models.Location", null)
-                        .WithMany("Events")
-                        .HasForeignKey("LocationId");
-
                     b.HasOne("ASPNETCLINIC.Models.Patient", "Patients")
                         .WithMany("Events")
                         .HasForeignKey("PatientsId")
@@ -378,11 +355,6 @@ namespace ASPNETCLINIC.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ASPNETCLINIC.Models.Location", b =>
-                {
-                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("ASPNETCLINIC.Models.Patient", b =>

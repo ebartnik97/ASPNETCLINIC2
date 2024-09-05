@@ -9,12 +9,12 @@ namespace ASPNETCLINIC.Models.ViewModels
         public List<SelectListItem> Patient = new List<SelectListItem>();
         public string Name { get; set; }
 
-        public EventViewModel(Event myevent, List<Event> patients )
+        public EventViewModel(Event myevent, List<Patient> patients)
         {
             Event = myevent;
             Name = myevent.Patients.Name;
 
-        foreach (var pat in patients )
+            foreach (var pat in patients)
             {
                 Patient.Add(new SelectListItem() { Text = pat.Name });
             }
@@ -28,8 +28,12 @@ namespace ASPNETCLINIC.Models.ViewModels
             }
         }
 
-        public EventViewModel()
+        public EventViewModel(Event @event)
         {
         }
+
+        public EventViewModel() { }
+    
+
     }
 }

@@ -10,11 +10,15 @@ namespace ASPNETCLINIC.Models
 
         public string PatientSurname { get; set; }
 
-        public long PESEL { get; set; }
-        
+        public string PESEL { get; set; }
+
         //Wspoldzielone dane
 
         public virtual ICollection<Event> Events { get; set; }
 
+
+        public Patient()
+        {
+        }
     }
 }

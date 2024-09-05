@@ -36,5 +36,8 @@ namespace ASPNETCLINIC.Data
 
         public DbSet<Event> Events { get; set; }
         public DbSet<Patient> Patients { get; set; }
+
+        public DbSet<Doctor> Locations { get; set; }
     }
+
 }
