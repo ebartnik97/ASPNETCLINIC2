@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ASPNETCLINIC.Data.Migrations
+namespace ASPNETCLINIC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240829230101_zmiany5")]
-    partial class zmiany5
+    [Migration("20240907103712_nowabaza")]
+    partial class nowabaza
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,8 +139,9 @@ namespace ASPNETCLINIC.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PESEL")
-                        .HasColumnType("bigint");
+                    b.Property<string>("PESEL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PatientSurname")
                         .IsRequired()

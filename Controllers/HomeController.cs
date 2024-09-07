@@ -1,5 +1,7 @@
 using ASPNETCLINIC.Data;
+using ASPNETCLINIC.Helpers;
 using ASPNETCLINIC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -16,12 +18,15 @@ namespace ASPNETCLINIC.Controllers
             _logger = logger;
             _idal = idal;
         }
-
+         [Authorize]
         public IActionResult Index()
         {
-            var myevent = _idal.GetEvent(1);
+            ViewData["Resources"]= JSONListHelper.GetResourceListJSONString(_idal.GetPatients());
+            ViewData["Events"]= JSONListHelper.GetEventListJSONString(_idal.GetEvents());
             return View();
         }
+        
+   
 
         public IActionResult Privacy()
         {

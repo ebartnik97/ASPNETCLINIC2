@@ -9,6 +9,7 @@ using ASPNETCLINIC.Data;
 using ASPNETCLINIC.Models;
 //using AspNetCore;
 using ASPNETCLINIC.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace ASPNETCLINIC.Controllers
 {
@@ -67,6 +68,7 @@ namespace ASPNETCLINIC.Controllers
 
             try
             {
+
                 _dal.CreateEvent(form);
                 TempData["Alert"] = "Dodano nową pozycję: " + form["Name"];
                 return RedirectToAction("Index");

@@ -1,4 +1,5 @@
 ﻿using ASPNETCLINIC.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace ASPNETCLINIC.Data
 {
@@ -13,9 +14,7 @@ namespace ASPNETCLINIC.Data
         public List<Patient> GetPatients();
         public Patient GetPatient(int id);
         public void CreatePatient(Patient patient);
-        public void CreateLocation(Doctor location);
-        public List<Doctor> GetLocations();
-        public Doctor GetLocation(int id);
+        public void DeletePatient(int id);
 
     }
     public class DAL : IDAL
@@ -40,12 +39,12 @@ namespace ASPNETCLINIC.Data
             return db.Events.FirstOrDefault(x => x.Id == id);
 
         }
-     
+
         public void CreateEvent(IFormCollection form)
         {
             var locname = form["Patient"].ToString();
             var newevent = new Event(form, db.Patients.FirstOrDefault(x => x.Name == locname));
-      
+
             db.Events.Add(newevent);
             db.SaveChanges();
 
@@ -82,20 +81,12 @@ namespace ASPNETCLINIC.Data
             db.Patients.Add(patient);
             db.SaveChanges();
         }
-        public List<Doctor> GetLocations()
+        public void DeletePatient(int id)
         {
-            return db.Locations.ToList();
-        }
-
-        public Doctor GetLocation(int id)
-        {
-            return db.Locations.Find(id);
-        }
-
-        public void CreateLocation(Doctor location)
-        {
-            db.Locations.Add(location);
+            var patient = db.Patients.Find(id);
+            db.Patients.Remove(patient);
             db.SaveChanges();
         }
+
     }
 }

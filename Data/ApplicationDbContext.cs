@@ -1,6 +1,8 @@
 ﻿using ASPNETCLINIC.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace ASPNETCLINIC.Data
 {
@@ -37,7 +39,7 @@ namespace ASPNETCLINIC.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Patient> Patients { get; set; }
 
-        public DbSet<Doctor> Locations { get; set; }
+
     }
 
 }

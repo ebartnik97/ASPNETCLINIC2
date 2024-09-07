@@ -4,19 +4,16 @@ using ASPNETCLINIC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ASPNETCLINIC.Data.Migrations
+namespace ASPNETCLINIC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240829220144_zmiany3")]
-    partial class zmiany3
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,8 +136,9 @@ namespace ASPNETCLINIC.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PESEL")
-                        .HasColumnType("bigint");
+                    b.Property<string>("PESEL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PatientSurname")
                         .IsRequired()

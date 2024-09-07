@@ -74,6 +74,32 @@ namespace ASPNETCLINIC.Controllers
             }
             return View(patient);
         }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var @patient = _dal.GetPatient((int)id);
+            if (@patient == null)
+            {
+                return NotFound();
+            }
+
+            return View(@patient);
+        }
+
+        // POST: Event/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _dal.DeletePatient(id);
+            TempData["Alert"] = "Usunąłeś wpis ";
+            return RedirectToAction(nameof(Index));
+
+        }
 
     }
     }
